@@ -1,0 +1,2 @@
+include mhmp/lokalizator/templates/*.html
+include mhmp/lokalizator/static/*/*

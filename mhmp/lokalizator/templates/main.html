@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Lokalizátor</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/style.css">
+ </head>
+ <body>
+  <div class="container">
+   <h1>Lokalizátor</h1>
+
+   {% for message in get_flashed_messages('main') %}
+   <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Chyba:</strong> {{ message[1] }}
+   </div>
+   {% endfor %}
+
+  <div class="row">
+   <div class="col-md-6">
+    <p>Tento nástroj slouží k doplnění CSV souborů s adresami o GPS souřadnice
+       odpovídající daným adresám; především pro portál otevřených dat MHMP.<br>
+       K detekci souřadnic se využívá databáze Institutu plánování a rozvoje.</p>
+   </div>
+  </div>
+
+  <form action="/lokalizator/upload" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="csv">Datový soubor</label>
+      <input type="file" name="csv" id="csv">
+      <p class="help-block">Datový soubor ve formátu CSV.</p>
+    </div>
+    <button type="submit" class="btn btn-default">Zpracovat</button>
+  </form>
+
+  <script src="//code.jquery.com/jquery-1.11.3.min.js" integrity="sha512-xAERw8wHVOkM9x9y9/FvQ7g1t+gIQj39mfkN1Rd1OLcC5k/x2e6NO8hq6qEbb3oO+CYYTjVLFiFYg5/7ddF0zA==" crossorigin="anonymous"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+ </body>
+</html>
+<!-- vim:set sw=1 ts=1 et: -->
