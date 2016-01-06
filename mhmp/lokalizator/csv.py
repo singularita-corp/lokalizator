@@ -20,7 +20,7 @@ def head_suggests_address(header):
     return False
 
 def row_suggests_address(row):
-    return match(r'\w+ +\d+/\d+') and True
+    return match(r'\w+ +\d+/\d+', row) and True
 
 
 def shorten(text):
