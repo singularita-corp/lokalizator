@@ -65,7 +65,7 @@ class Manager(object):
 
         coords = [None] * len(addresses)
 
-        for loc in resp['locations']:
+        for loc in resp.get('locations', []):
             rid = loc['attributes']['ResultID']
             lat = loc['location']['y']
             lon = loc['location']['x']
