@@ -9,6 +9,7 @@ from twisted.internet.threads import blockingCallFromThread
 
 from mhmp.lokalizator.csv import analyze_file
 from mhmp.lokalizator.geo import geocode_file
+from mhmp.lokalizator.manager import BackendError
 
 import flask
 import os
@@ -68,6 +69,10 @@ def make_website_app(manager, debug):
 
         try:
             data = geocode_file(manager, fp, col)
+        except BackendError as e:
+            print_exc()
+            flask.flash(u'Systém pro překlad adres vrátil chybu:\n{}'.format(e.message))
+            return flask.redirect('/lokalizator/')
         except:
             print_exc()
             flask.flash(u'Nastala chyba při zpracování souboru. Omlouváme se.')

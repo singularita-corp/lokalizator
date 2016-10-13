@@ -11,7 +11,12 @@ from simplejson import load, dumps
 from urllib import urlopen, urlencode
 from uuid import uuid4
 
-__all__ = ['Manager']
+__all__ = ['Manager', 'BackendError']
+
+
+class BackendError(Exception):
+    """Backend returned error."""
+
 
 class Manager(object):
     """The main application logic."""
@@ -62,6 +67,9 @@ class Manager(object):
         fp = urlopen(self.query, data)
         resp = load(fp)
         fp.close()
+
+        if resp.get('error'):
+            raise BackendError(resp['error'].get('message', '[no message]'))
 
         coords = [None] * len(addresses)
 
